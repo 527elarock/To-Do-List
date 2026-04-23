@@ -1,3 +1,215 @@
-.done{
-    background-color: red;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #f0eeea;
+    --surface: #ffffff;
+    --border: #e2dfd9;
+    --border-hover: #ccc9c2;
+    --text: #1c1b19;
+    --muted: #9e9b96;
+    --accent: #2563eb;
+    --accent-dark: #1d4ed8;
+    --radius: 10px;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+}
+
+/* ── Header ── */
+header {
+    display: none;
+}
+
+/* ── Main ── */
+main {
+    display: flex;
+    justify-content: center;
+    padding: 4rem 1.5rem;
+}
+
+.card-wrapper {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* ── Card header ── */
+.card-header-section {
+    margin-bottom: 1.5rem;
+}
+
+.card-header-section h2 {
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 3px;
+}
+
+#taskCounter {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* ── Input row ── */
+.input-row {
+    display: flex;
+    gap: 0;
+    margin-bottom: 1rem;
+}
+
+#taskInput {
+    flex: 1;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    height: 42px;
+    padding: 0 14px;
+    border: 1px solid var(--border);
+    border-right: none;
+    border-radius: var(--radius) 0 0 var(--radius);
+    background: var(--bg);
+    color: var(--text);
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+#taskInput:focus {
+    border-color: var(--accent);
+    background: #fff;
+}
+
+#taskInput::placeholder {
+    color: #c4c1bb;
+}
+
+#addTaskBtn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    height: 42px;
+    padding: 0 20px;
+    background: var(--accent);
+    color: #fff;
+    border: 1px solid var(--accent);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+}
+
+#addTaskBtn:hover {
+    background: var(--accent-dark);
+    border-color: var(--accent-dark);
+}
+
+/* ── Task list ── */
+#taskList {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 1rem;
+}
+
+#taskList .list-group-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--bg);
+    border: 1px solid var(--border) !important;
+    border-radius: var(--radius) !important;
+    padding: 10px 12px;
+    font-size: 14px;
+    color: var(--text);
+    transition: border-color 0.15s;
+}
+
+#taskList .list-group-item:hover {
+    border-color: var(--border-hover) !important;
+}
+
+/* Done state */
+#taskList .list-group-item.done {
+    background: #f0fdf4;
+    border-color: #bbf7d0 !important;
+    text-decoration: line-through;
+    color: var(--muted);
+}
+
+/* Button group inside items */
+#taskList .list-group-item>span,
+#taskList .list-group-item> :not(button) {
+    flex: 1;
+    min-width: 0;
+    word-break: break-word;
+}
+
+#taskList .btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    height: 26px;
+    padding: 0 9px;
+    border-radius: 6px !important;
+    border: none !important;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+    flex-shrink: 0;
+    box-shadow: none !important;
+}
+
+#taskList .btn-success {
+    background: #dcfce7 !important;
+    color: #166534 !important;
+}
+
+#taskList .btn-success:hover {
+    background: #bbf7d0 !important;
+}
+
+#taskList .btn-danger {
+    background: #fee2e2 !important;
+    color: #991b1b !important;
+}
+
+#taskList .btn-danger:hover {
+    background: #fecaca !important;
+}
+
+/* ── Clear all ── */
+#clearTasksBtn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    width: 100%;
+    height: 38px;
+    border-radius: var(--radius);
+    background: transparent;
+    border: 1px solid #fca5a5;
+    color: #dc2626;
+    cursor: pointer;
+    transition: background 0.15s;
+    margin-top: 0.25rem;
+}
+
+#clearTasksBtn:hover {
+    background: #fff5f5;
 }
