@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=DM+Mono&display=swap');
+@import url('[https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@400;500;600&display=swap](https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Inter:wght@400;500;600&display=swap)');
 
 *,
 *::before,
@@ -9,207 +9,300 @@
 }
 
 :root {
-    --bg: #f0eeea;
-    --surface: #ffffff;
-    --border: #e2dfd9;
-    --border-hover: #ccc9c2;
-    --text: #1c1b19;
-    --muted: #9e9b96;
-    --accent: #2563eb;
-    --accent-dark: #1d4ed8;
-    --radius: 10px;
+    --bg: #050816;
+    --bg-secondary: #0b1026;
+    --surface: rgba(12, 18, 45, 0.85);
+    --surface-glow: rgba(0, 255, 255, 0.08);
+    --border: rgba(0, 255, 255, 0.25);
+    --border-hover: rgba(255, 0, 255, 0.45);
+    --text: #ecfeff;
+    --muted: #94a3b8;
+    --accent: #00f5ff;
+    --accent-secondary: #ff00e5;
+    --success: #39ff88;
+    --danger: #ff5c8a;
+    --radius: 14px;
+}
+
+/* Animations */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    70% {
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(57, 255, 136, 0.18);
+    }
+    50% {
+        box-shadow: 0 0 30px rgba(57, 255, 136, 0.5);
+    }
+}
+
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow:
+            inset 0 0 12px rgba(0, 245, 255, 0.08),
+            0 0 12px rgba(0, 245, 255, 0.35);
+    }
+    50% {
+        box-shadow:
+            inset 0 0 12px rgba(0, 245, 255, 0.15),
+            0 0 20px rgba(0, 245, 255, 0.5);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-3px);
+    }
 }
 
 body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
+    font-family: 'Inter', sans-serif;
+    background: radial-gradient(circle at top left, #111c44 0%, #050816 45%, #02030a 100%);
     color: var(--text);
     min-height: 100vh;
 }
 
-/* ── Header ── */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(circle at 20% 20%, rgba(0, 245, 255, 0.15), transparent 25%),
+        radial-gradient(circle at 80% 10%, rgba(255, 0, 229, 0.15), transparent 20%),
+        radial-gradient(circle at 50% 80%, rgba(57, 255, 136, 0.08), transparent 25%);
+    pointer-events: none;
+}
+
 header {
     display: none;
 }
 
-/* ── Main ── */
 main {
     display: flex;
     justify-content: center;
-    padding: 4rem 1.5rem;
+    align-items: center;
+    min-height: 100vh;
+    padding: 2rem 1.5rem;
 }
 
 .card-wrapper {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
     width: 100%;
-    max-width: 480px;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    max-width: 560px;
+    padding: 2.25rem;
+    background: var(--surface);
+    backdrop-filter: blur(18px);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+        0 0 25px rgba(0, 245, 255, 0.12),
+        0 0 60px rgba(255, 0, 229, 0.08);
 }
 
-/* ── Card header ── */
 .card-header-section {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.75rem;
 }
 
 .card-header-section h2 {
-    font-size: 22px;
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    margin-bottom: 3px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-shadow:
+        0 0 8px rgba(0, 245, 255, 0.8),
+        0 0 18px rgba(0, 245, 255, 0.5);
 }
 
 #taskCounter {
-    font-family: 'DM Mono', monospace;
-    font-size: 12px;
+    margin-top: 0.4rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
     color: var(--muted);
 }
 
-/* ── Input row ── */
 .input-row {
     display: flex;
-    gap: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
+    gap: 0.75rem;
 }
 
 #taskInput {
     flex: 1;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 14px;
-    height: 42px;
-    padding: 0 14px;
+    height: 50px;
+    padding: 0 1rem;
+    border-radius: 14px;
     border: 1px solid var(--border);
-    border-right: none;
-    border-radius: var(--radius) 0 0 var(--radius);
-    background: var(--bg);
+    background: rgba(5, 8, 22, 0.9);
     color: var(--text);
     outline: none;
-    transition: border-color 0.15s;
+    transition: all 0.25s ease;
+    box-shadow: inset 0 0 12px rgba(0, 245, 255, 0.05);
 }
 
 #taskInput:focus {
     border-color: var(--accent);
-    background: #fff;
+    animation: glowPulse 1.5s ease-in-out infinite;
 }
 
 #taskInput::placeholder {
-    color: #c4c1bb;
+    color: #64748b;
+}
+
+#addTaskBtn,
+#clearTasksBtn,
+#taskList .btn {
+    font-family: 'Orbitron', sans-serif;
+    border: none;
+    cursor: pointer;
+    transition: all 0.25s ease;
 }
 
 #addTaskBtn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
-    height: 42px;
-    padding: 0 20px;
-    background: var(--accent);
-    color: #fff;
-    border: 1px solid var(--accent);
-    border-radius: 0 var(--radius) var(--radius) 0;
-    cursor: pointer;
-    transition: background 0.15s;
-    white-space: nowrap;
+    height: 50px;
+    padding: 0 1.4rem;
+    border-radius: 14px;
+    background: rgba(0, 245, 255, 0.12);
+    color: var(--accent);
+    border: 1px solid rgba(0, 245, 255, 0.5);
+    box-shadow: 0 0 15px rgba(0, 245, 255, 0.2);
 }
 
 #addTaskBtn:hover {
-    background: var(--accent-dark);
-    border-color: var(--accent-dark);
+    background: rgba(0, 245, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(0, 245, 255, 0.45);
 }
 
-/* ── Task list ── */
-#taskList {
+#addTaskBtn:active {
+    transform: scale(0.95);
+}
+
+ul#taskList {
     list-style: none;
-    display: flex;
+    display: flex !important;
     flex-direction: column;
-    gap: 6px;
-    margin-bottom: 1rem;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    width: 100%;
 }
 
-#taskList .list-group-item {
-    display: flex;
+ul#taskList li {
+    display: flex !important;
     align-items: center;
-    justify-content: space-between;
-    gap: 10px;
-    background: var(--bg);
+    justify-content: flex-start !important;
+    gap: 0.75rem;
+    padding: 1rem;
+    margin: 0 0 0 0 !important;
+    border-radius: 16px !important;
+    background: linear-gradient(135deg, rgba(8, 15, 40, 0.95), rgba(15, 23, 55, 0.85)) !important;
     border: 1px solid var(--border) !important;
-    border-radius: var(--radius) !important;
-    padding: 10px 12px;
-    font-size: 14px;
     color: var(--text);
-    transition: border-color 0.15s;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+        0 0 18px rgba(0, 245, 255, 0.08);
 }
 
 #taskList .list-group-item:hover {
     border-color: var(--border-hover) !important;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+        0 0 24px rgba(255, 0, 229, 0.12);
 }
 
-/* Done state */
 #taskList .list-group-item.done {
-    background: #f0fdf4;
-    border-color: #bbf7d0 !important;
+    border-color: rgba(57, 255, 136, 0.45) !important;
+    background: linear-gradient(135deg, rgba(8, 40, 24, 0.9), rgba(10, 60, 35, 0.75)) !important;
+    color: #86efac;
     text-decoration: line-through;
-    color: var(--muted);
-}
-
-/* Button group inside items */
-#taskList .list-group-item>span,
-#taskList .list-group-item> :not(button) {
-    flex: 1;
-    min-width: 0;
-    word-break: break-word;
+    box-shadow: 0 0 20px rgba(57, 255, 136, 0.18);
+    animation: popIn 0.3s ease-out, pulse 2s ease-in-out infinite;
 }
 
 #taskList .btn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 11px;
-    font-weight: 500;
-    height: 26px;
-    padding: 0 9px;
-    border-radius: 6px !important;
-    border: none !important;
-    cursor: pointer;
-    transition: background 0.15s;
-    white-space: nowrap;
-    flex-shrink: 0;
-    box-shadow: none !important;
+    height: 32px;
+    padding: 0 0.9rem;
+    border-radius: 10px !important;
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
 }
 
 #taskList .btn-success {
-    background: #dcfce7 !important;
-    color: #166534 !important;
+    background: rgba(57, 255, 136, 0.15) !important;
+    color: var(--success) !important;
+    border: 1px solid rgba(57, 255, 136, 0.35) !important;
+    box-shadow: 0 0 12px rgba(57, 255, 136, 0.15);
 }
 
 #taskList .btn-success:hover {
-    background: #bbf7d0 !important;
+    background: rgba(57, 255, 136, 0.25) !important;
+    box-shadow: 0 0 18px rgba(57, 255, 136, 0.28);
 }
 
-#taskList .btn-danger {
-    background: #fee2e2 !important;
-    color: #991b1b !important;
-}
-
-#taskList .btn-danger:hover {
-    background: #fecaca !important;
-}
-
-/* ── Clear all ── */
 #clearTasksBtn {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 13px;
-    font-weight: 500;
     width: 100%;
-    height: 38px;
-    border-radius: var(--radius);
+    height: 46px;
+    border-radius: 14px;
     background: transparent;
-    border: 1px solid #fca5a5;
-    color: #dc2626;
-    cursor: pointer;
-    transition: background 0.15s;
-    margin-top: 0.25rem;
+    color: var(--danger);
+    border: 1px solid rgba(255, 92, 138, 0.45);
+    box-shadow: 0 0 12px rgba(255, 92, 138, 0.12);
 }
 
 #clearTasksBtn:hover {
-    background: #fff5f5;
+    background: rgba(255, 92, 138, 0.1);
+    box-shadow: 0 0 20px rgba(255, 92, 138, 0.25);
+}
+
+@media (max-width: 600px) {
+    .card-wrapper {
+        padding: 1.5rem;
+    }
+
+ .input-row {
+        flex-direction: column;
+    }
+
+    #addTaskBtn {
+        width: 100%;
+    }
+
+}
+
+#taskList .task-text {
+    flex: 1;
+    word-wrap: break-word;
+    text-align: left;
+    margin-left: 0;
+    padding-left: 0.25rem;
 }

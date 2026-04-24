@@ -1,4 +1,5 @@
 let tasks = []; //Empty array to store tasks
+let completed = [];
 
 document.getElementById("addTaskBtn").addEventListener("click", function () {
   //Get the value from INput field
@@ -7,6 +8,8 @@ document.getElementById("addTaskBtn").addEventListener("click", function () {
   if (taskInput) {
     //add new task to task array
     tasks.push(taskInput);
+
+    completed.push(false);
     //clear input field value
     document.getElementById("taskInput").value = "";
     //update Task List Display
@@ -26,14 +29,14 @@ function displayTasks() {
     li.setAttribute("id", `task${index}`);
     //add Styling
     li.classList.add(
-      "list-group-item",
-      "d-flex",
-      "justify-content-between",
-      "align-items-center",
-      
+      "list-group-item"
     );
+
+    if (completed[index]) {
+      li.classList.add("done");
+    }
     //Set innerHTML of the LI with a task and remove btn
-    li.innerHTML = `${task} <button class='btn btn-success btn-sm' onclick='markAsDone(${index})'>Mark as Done</button><button class='btn btn-success btn-sm' onclick='removeTask(${index})'>✔</button>`;
+    li.innerHTML = `<span class="task-text">${task}</span> <button class='btn btn-success btn-sm' onclick='markAsDone(${index})'>Mark as Done</button><button class='btn btn-success btn-sm' onclick='removeTask(${index})'>✔</button>`;
     //Append the new task list to the HTML
     taskList.appendChild(li);
   });
@@ -42,16 +45,14 @@ function displayTasks() {
 
 function removeTask(index) {
   tasks.splice(index, 1);
+  completed.splice(index, 1);
   displayTasks();
 }
-
-
 
 function updateCounter() {
   document.getElementById("taskCounter").textContent =
     `Total Tasks: ${tasks.length}`;
 }
-
 
 document.getElementById("clearTasksBtn").addEventListener("click", function () {
   tasks = [];
@@ -64,7 +65,7 @@ document.getElementById("taskInput").addEventListener("keydown", function (e) {
   }
 });
 
-function markAsDone(index){
-    document.getElementById(`task${index}`).classList.toggle("done")
-
+function markAsDone(index) {
+  completed[index] = !completed[index];
+  displayTasks();
 }
